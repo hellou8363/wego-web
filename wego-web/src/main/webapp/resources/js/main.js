@@ -1,16 +1,16 @@
 // 메인페이지 - 산정보, 모집, 후기 글 목록 위에서
 // 휠 스크롤 시 가로 슬라이드 구현
-$$(".mountain-info .wrap").addEventListener("wheel", (e) => {
+selector(".mountain-info .wrap").addEventListener("wheel", (e) => {
   e.preventDefault();
   e.currentTarget.scrollLeft += e.deltaY;
 });
 
-$$(".recruit .wrap").addEventListener("wheel", (e) => {
+selector(".recruit .wrap").addEventListener("wheel", (e) => {
   e.preventDefault();
   e.currentTarget.scrollLeft += e.deltaY;
 });
 
-$$(".review .wrap").addEventListener("wheel", (e) => {
+selector(".review .wrap").addEventListener("wheel", (e) => {
   e.preventDefault();
   e.currentTarget.scrollLeft += e.deltaY;
 });

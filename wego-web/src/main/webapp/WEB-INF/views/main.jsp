@@ -15,12 +15,14 @@
 <link rel="stylesheet" href="/resources/css/main.css" />
 <script src="/resources/js/header.js" defer></script>
 <script src="/resources/js/main.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.0/jquery-migrate.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.0/jquery-migrate.min.js"></script>
 </head>
 <body>
-	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="total-wrap">
+		<%@include file="/WEB-INF/views/common/header.jsp"%>
 		<section>
 			<div class="rank">
 				<div class="rankers">
@@ -217,7 +219,8 @@
 					</div>
 				</div>
 			</div>
-			<a href="#" class="scrollToTop"> <img src="/resources/svg/top.svg" />
+			<a href="#" class="scrollToTop"> <img
+				src="/resources/svg/top.svg" />
 			</a> <a href="#" class="chat"> <img src="/resources/svg/chat.svg" />
 			</a>
 		</section>

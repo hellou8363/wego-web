@@ -3,8 +3,8 @@
 <header>
 	<div class="header">
 		<div class="logoDiv">
-			<a href="#"> <span class="wegoLogo"></span> <span
-				class="wogoTitle"></span>
+			<a href="#"> <span class="wegoLogo"></span>
+			<span class="wogoTitle"></span>
 			</a>
 		</div>
 		<div>
@@ -37,8 +37,7 @@
 		<div>
 			<form action="#" method="get">
 				<button class="search-icon" type="submit"></button>
-				<input type="text" name="search" id="search" value=""
-					placeholder="Search" />
+				<input type="text" name="search" id="search" placeholder="Search" />
 				<button class="cancel" type="reset"></button>
 			</form>
 		</div>
