@@ -340,9 +340,9 @@ const alertWindow = (item) =>
 const formCheck = () => {
   const form = document.forms[0];
 
-  if (form.elements.mountainName.value === "") {
+  if (form.elements.sanName.value === "") {
     alert();
-    alertWindow(selector("select[name=mountainName]"));
+    alertWindow(selector("select[name=sanName]"));
     return false;
   } // if
 
@@ -364,7 +364,7 @@ const formCheck = () => {
     return false;
   } // if
 
-  if (form.elements.member.value < 2 || form.elements.member.value > 45) {
+  if (form.elements.partyMax.value < 2 || form.elements.partyMax.value > 45) {
     alert();
     alertWindow(selector("#member"));
     return false;
@@ -372,12 +372,12 @@ const formCheck = () => {
 
   // 위 필수입력값이 모두 입력되었다면 폼 데이터에 저장
   // 이미지는 업로드와 동시에 바로 폼 데이터에 저장
-  formData.set("mountainName", form.elements.mountainName.value);
+  formData.set("sanName", form.elements.sanName.value);
   formData.set("title", form.elements.title.value);
   formData.set("contents", form.elements.contents.value);
-  formData.set("data", form.elements.date.value);
+  formData.set("date", form.elements.date.value);
   formData.set("time", form.elements.time.value);
-  formData.set("maxMember", form.elements.member.value);
+  formData.set("partyMax", form.elements.partyMax.value);
   formData.set("items", form.elements.items.value);
   formData.set("condition", form.elements.condition.value);
 
@@ -387,9 +387,13 @@ const formCheck = () => {
 // 등록 여부 재확인 -> 예(폼 전송) 이벤트
 selector(".upload input[type=submit]").onclick = (e) => {
   e.preventDefault();
-  
-  const xhr = new XMLHttpRequest();
-  xhr.open("POST", "/recruitment/upload");
-//    xhr.open("POST", "http://localhost:7070");
-  xhr.send(formData);
+
+  fetch("/recruit/register", {
+    method: "POST",
+    body: formData,
+  }).then(res => {
+	console.log(res);
+	console.log(res.url);
+	self.location = res.url
+	});
 };

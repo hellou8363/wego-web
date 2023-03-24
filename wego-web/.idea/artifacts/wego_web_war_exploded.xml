@@ -1,0 +1,58 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="wego-web:war exploded">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <exploded>true</exploded>
+        <module>wego-web</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="wego-web" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-core:2.20.0" />
+          <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-api:2.20.0" />
+          <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-slf4j-impl:2.20.0" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.25" />
+          <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
+          <element id="library" level="project" name="Maven: org.aspectj:aspectjrt:1.9.19" />
+          <element id="library" level="project" name="Maven: org.aspectj:aspectjweaver:1.9.19" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-context:5.3.25" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-aop:5.3.25" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-beans:5.3.25" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-core:5.3.25" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-jcl:5.3.25" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-expression:5.3.25" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:5.3.25" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-web:5.3.25" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:5.3.25" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-tx:5.3.25" />
+          <element id="library" level="project" name="Maven: org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4:1.16" />
+          <element id="library" level="project" name="Maven: com.oracle.database.jdbc:ojdbc8:21.5.0.0" />
+          <element id="library" level="project" name="Maven: com.oracle.database.security:oraclepki:21.5.0.0" />
+          <element id="library" level="project" name="Maven: com.oracle.database.security:osdt_core:21.5.0.0" />
+          <element id="library" level="project" name="Maven: com.oracle.database.security:osdt_cert:21.5.0.0" />
+          <element id="library" level="project" name="Maven: com.oracle.database.nls:orai18n:21.5.0.0" />
+          <element id="library" level="project" name="Maven: com.zaxxer:HikariCP:5.0.1" />
+          <element id="library" level="project" name="Maven: org.mybatis:mybatis:3.5.13" />
+          <element id="library" level="project" name="Maven: org.mybatis:mybatis-spring:3.0.1" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.14.2" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.14.2" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.14.2" />
+          <element id="library" level="project" name="Maven: javax.inject:javax.inject:1" />
+          <element id="library" level="project" name="Maven: org.projectlombok:lombok:1.18.26" />
+          <element id="library" level="project" name="Maven: commons-fileupload:commons-fileupload:1.5" />
+          <element id="library" level="project" name="Maven: commons-io:commons-io:2.11.0" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/target/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="wego-web/web/Web" />
+    </root>
+  </artifact>
+</component>

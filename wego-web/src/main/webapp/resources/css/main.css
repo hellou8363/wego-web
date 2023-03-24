@@ -21,6 +21,7 @@ section div>h2 {
 .wrap {
 	display: grid;
 	grid-template-columns: repeat(10, 1fr);
+	grid-auto-flow: column;
 	gap: 10px;
 	overflow: scroll;
 	white-space: nowrap;

@@ -1,0 +1,157 @@
+img {
+    /* 드래그 방지 */
+    -webkit-user-drag: none;
+  }
+/* div한번더사용 */
+.container {
+    width: 100%;
+    position:  relative;
+}
+
+
+/* 정렬 */
+div.select-sort {
+    display: grid;
+    width: 100%;
+    grid-column-start: 1;
+    grid-column-end: 5;
+  
+    text-align: right;
+}
+.select-sort > .sort {
+    margin: 0px;
+}
+.sort > .sortBy {
+    width: 130px;
+    padding: 10px;
+  
+    border: 1px solid black;
+    border-radius: 10px;
+    
+    font-weight: bold;
+    font-size: 14px;
+    
+    background: url(../svg/arrow.svg) no-repeat 95% 50%;
+    background-size: 25px;
+    
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+
+/* 프레임 */
+.mountain-info {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+	gap: 20px;
+    
+    place-items: center;
+    justify-content: center;
+}
+
+
+/* Item */
+.mountain-item {
+    width: 200px;
+    height: 330px;
+    padding: 15px;
+    border: 0;
+    border-radius: 10px;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.25), 0 3px 3px rgba(0, 0, 0, 0.22);
+
+    background-color: #fff;
+
+    text-align: center;
+
+    display: grid;
+    grid-template-rows: 165px 45px 90px 30px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas:
+        "mountainImg mountainImg mountainImg"
+        ". mountainName ."
+        "mountainContents mountainContents mountainContents"
+        "mountainLike . .";
+
+    align-items: center;
+    justify-items: center;  
+}
+.mountain-item > p {
+    margin: 0;
+    justify-self: left;
+  }
+.mountain-item > .mountain-img {
+    grid-area: mountainImg;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+.mountain-item > .mountain-name {
+    grid-area: mountainName;
+
+    font-size: 20px;
+    margin: 0;
+}
+.mountain-item > .mountain-contents {
+    grid-area: mountainContents;
+
+    width: 195px;
+    
+    font-size: 15px;
+
+    text-align: left;
+
+    white-space: nowrap;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+.mountain-item > .mountain-like {
+    grid-area: mountainLike;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    justify-self: left;
+}
+.mountain-like > .favorite {
+    width: 30px;
+    height: 30px;
+    border: 0;
+    background: url(../svg/favorite.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.mountain-like > .favorite-count {
+    font-size: 12px;
+}
+
+
+
+@media screen and (max-width: 768px) {
+    .mountain-info {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    div.select-sort {
+        grid-column-start: 1;
+        grid-column-end: 4;
+    }
+}
+
+@media screen and (max-width: 426px) {
+    .mountain-info {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    div.select-sort {
+        grid-column-start: 1;
+        grid-column-end: 2;
+    }
+}
+

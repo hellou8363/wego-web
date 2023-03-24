@@ -1,0 +1,209 @@
+img {
+    /* 드래그 방지 */
+    -webkit-user-drag: none;
+}
+
+/* div한번더사용 */
+.container {
+    width: 100%;
+    position: relative;
+}
+
+
+/* 정렬 */
+div.select-sort {
+    display: grid;
+    width: 100%;
+    grid-column-start: 1;
+    grid-column-end: 5;
+
+    text-align: right;
+}
+
+.select-sort>.sort {
+    margin: 0px;
+}
+
+.sort>.sortBy {
+    width: 130px;
+    padding: 10px;
+
+    border: 1px solid black;
+    border-radius: 10px;
+
+    font-weight: bold;
+    font-size: 14px;
+
+    background: url(../svg/arrow.svg) no-repeat 95% 50%;
+    background-size: 25px;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+
+/* 프레임 */
+.review {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+    gap: 20px;
+
+    place-items: center;
+    justify-content: center;
+}
+
+
+/* Item */
+
+.review-item {
+    width: 200px;
+    height: 330px;
+    padding: 15px;
+    border: 0;
+    border-radius: 10px;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.25), 0 3px 3px rgba(0, 0, 0, 0.22);
+
+    background-color: #fff;
+
+    text-align: center;
+
+    display: grid;
+    grid-template-rows: 35px 140px 35px 90px 30px;
+    grid-template-columns: 40px 80px 10px 70px;
+    grid-template-areas:
+        "reviewUserImg reviewUserName reviewUserName reviewMountainName"
+        "reviewImg reviewImg reviewImg reviewImg"
+        "reviewTitle reviewTitle reviewTitle reviewTitle"
+        "reviewContents reviewContents reviewContents reviewContents"
+        "reviewLike reviewLike . reviewDate";
+
+    align-items: center;
+    justify-items: center;
+}
+
+.review-item>p {
+    margin: 0;
+    justify-self: left;
+}
+
+
+.review-item>.user-img {
+    grid-area: reviewUserImg;
+
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+
+    justify-self: left;
+}
+
+.review-item>.user-name {
+    grid-area: reviewUserName;
+
+    font-size: 14px;
+    margin: 0;
+
+    justify-self: left;
+}
+
+.review-item>.mountain-name {
+    grid-area: reviewMountainName;
+    font-size: 14px;
+    margin: 0;
+    justify-self: right;
+}
+
+.review-item>.review-img {
+    grid-area: reviewImg;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+
+    justify-self: center;
+}
+
+.review-item>.review-title {
+    grid-area: reviewTitle;
+
+    font-size: 20px;
+    margin: 0;
+
+    justify-self: center;
+}
+
+.review-item>.review-contents {
+    grid-area: reviewContents;
+
+    width: 195px;
+    margin: 0;
+
+    font-size: 15px;
+
+    justify-self: center;
+    text-align: left;
+
+    white-space: nowrap;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.review-item>.review-like {
+    grid-area: reviewLike;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    justify-self: left;
+}
+
+.review-like>.favorite {
+    width: 30px;
+    height: 30px;
+    border: 0;
+    background: url(../svg/favorite.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.review-like>.favorite-count {
+    font-size: 12px;
+}
+
+.review-item>.review-date {
+    grid-area: reviewDate;
+
+    font-size: 12px;
+    justify-self: right;
+}
+
+
+
+
+@media screen and (max-width: 768px) {
+    .review {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    div.select-sort {
+        grid-column-start: 1;
+        grid-column-end: 4;
+    }
+}
+
+@media screen and (max-width: 426px) {
+    .review {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    div.select-sort {
+        grid-column-start: 1;
+        grid-column-end: 2;
+    }
+}

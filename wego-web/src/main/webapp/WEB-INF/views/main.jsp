@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -157,66 +159,81 @@
 			<div class="mountain-info">
 				<h2>❤️ 산 ❤️</h2>
 				<div class="wrap">
-					<div class="mountain-item">
-						<img class="mountain-img" src="./img/gray.png" alt="img" />
-						<h3 class="mountain-name" id="mountainName">한라산</h3>
-						<p class="contents" id="text">Lorem ipsum dolor sit amet.Lorem
-							ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor
-							sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit
-							amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.</p>
-						<form class="mountain-like" action="#" method="get">
-							<button type="submit" name="favorite" value="true"
-								class="favorite"></button>
-							<span class="favorite-count">1000</span>
-						</form>
-					</div>
+					<c:forEach var="item" items="${mountainInfoList}">
+						<a href="/info/detail?sanInfoId=${item.sanInfoId}">
+							<div class="mountain-item">
+								<img class="mountain-img" src="/img/defaultImg.png" alt="img" />
+								<h3 class="mountain-name" id="mountainName">${item.sanName}</h3>
+								<p class="contents" id="text">${item.details}</p>
+								<form class="mountain-like" action="#" method="get">
+									<button type="submit" name="favorite" value="true"
+										class="favorite"></button>
+									<span class="favorite-count">${item.likeCnt}</span>
+								</form>
+							</div> <!-- mountain-item -->
+						</a>
+					</c:forEach>
 				</div>
 			</div>
 			<div class="recruit">
 				<h2>❤️ 모집 글 ❤️</h2>
 				<div class="wrap">
-					<div class="recruit-item">
-						<img class="user-img" src="./img/gray.png" alt="img" />
-						<p class="user-name" id="userName">작성자</p>
-						<p class="mountain-name" id="mountainName">산이름</p>
-						<img class="recruit-img" src="./img/gray.png" alt="img" />
-						<p class="recruit-title" id="title">제목</p>
-						<p class="recruit-schedule-schedule">날짜:</p>
-						<p class="recruit-schedule" id="schedule">2023. 12. 15.</p>
-						<p class="recruit-schedule-time">시간:</p>
-						<p class="recruit-time" id="time">오전 11시 30분</p>
-						<p class="recruit-schedule-member">참여 인원:</p>
-						<p class="recruit-member" id="memberCount">35 / 45</p>
-
-						<form class="recruit-like" action="#" method="get">
-							<button type="submit" name="favorite" value="true"
-								class="favorite"></button>
-							<span class="favorite-count">1000</span>
-						</form>
-						<p class="recruit-date" id="date">작성일자</p>
-					</div>
+					<c:forEach var="item" items="${recruitmentList}">
+						<a href="/recruit/detail?sanPartyId=${item.sanPartyId}">
+							<div class="recruit-item">
+								<img class="user-img" src="${item.userPic}" alt="img" />
+								<p class="user-name" id="userName">${item.nickName}</p>
+								<p class="mountain-name" id="mountainName">${item.sanName}</p>
+								<img class="recruit-img" src="${item.img}" alt="img" />
+								<p class="recruit-title" id="title">${item.title}</p>
+								<p class="recruit-schedule-schedule">날짜:</p>
+								<p class="recruit-schedule" id="schedule">
+									<fmt:formatDate value="${item.partyDate}" pattern="yyyy-MM-dd" />
+								</p>
+								<p class="recruit-schedule-time">시간:</p>
+								<p class="recruit-time" id="time">
+									<fmt:formatDate value="${item.partyDate}" pattern="HH:mm" />
+								</p>
+								<p class="recruit-schedule-member">참여 인원:</p>
+								<p class="recruit-member" id="memberCount">${item.userCnt}/
+									${item.partyMax}</p>
+								<form class="recruit-like" action="#" method="get">
+									<button type="submit" name="favorite" value="true"
+										class="favorite"></button>
+									<span class="favorite-count">${item.likeCnt}</span>
+								</form>
+								<p class="recruit-date" id="date">
+									<fmt:formatDate value="${item.createDt}" pattern="yyyy-MM-dd" />
+								</p>
+							</div> <!-- item -->
+						</a>
+					</c:forEach>
 				</div>
+				<!-- wrap -->
 			</div>
+			<!-- recruit -->
 			<div class="review">
 				<h2>❤️ 후기 글 ❤️</h2>
 				<div class="wrap">
-					<div class="review-item">
-						<img class="user-img" src="./img/gray.png" alt="img" />
-						<p class="user-name" id="userName">작성자</p>
-						<p class="mountain-name" id="mountainName">산이름</p>
-						<img class="review-img" src="./img/gray.png" alt="img" />
-						<h3 class="review-title" id="title">제목</h3>
-						<p class="review-contents" id="text">Lorem ipsum dolor sit
-							amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem
-							ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor
-							sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.</p>
-						<form class="review-like" action="#" method="get">
-							<button type="submit" name="favorite" value="true"
-								class="favorite"></button>
-							<span class="favorite-count">1000</span>
-						</form>
-						<p class="review-date" id="date">작성일자</p>
-					</div>
+					<c:forEach var="item" items="${reviewList}">
+						<a href="/review/detail?sanReviewId=${item.sanReviewId}">
+							<div class="review-item">
+								<img class="user-img" src="${item.userPic}" alt="img" />
+								<p class="user-name" id="userName">${item.nickName}</p>
+								<p class="mountain-name" id="mountainName">${item.sanName}</p>
+								<img class="review-img" src="/img/defaultImg.png" alt="img" />
+								<h3 class="review-title" id="title">${item.title}</h3>
+								<p class="review-contents" id="text">${item.contents}</p>
+								<form class="review-like" action="#" method="get">
+									<button type="submit" name="favorite" value="true"
+										class="favorite"></button>
+									<span class="favorite-count">${item.likeCnt}</span>
+								</form>
+								<p class="review-date" id="date"><fmt:formatDate value="${item.createDt}" pattern="yyyy-MM-dd" /></p>
+							</div>
+							<!-- review-item -->
+						</a>
+					</c:forEach>
 				</div>
 			</div>
 			<a href="#" class="scrollToTop"> <img

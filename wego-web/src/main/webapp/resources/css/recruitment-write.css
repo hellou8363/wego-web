@@ -43,7 +43,7 @@
 	background-repeat: no-repeat;
 }
 
-select[name="mountainName"] {
+select[name="sanName"] {
 	width: 208px;
 	height: 40px;
 	padding: 4px 10px 6px 8px;

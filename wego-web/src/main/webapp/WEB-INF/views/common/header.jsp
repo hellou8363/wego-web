@@ -3,17 +3,17 @@
 <header>
 	<div class="header">
 		<div class="logoDiv">
-			<a href="#"> <span class="wegoLogo"></span>
+			<a href="/"> <span class="wegoLogo"></span>
 			<span class="wogoTitle"></span>
 			</a>
 		</div>
 		<div>
 			<nav>
 				<ul class="navbar">
-					<li><a href="#">산정보</a></li>
-					<li><a href="#">등산후기</a></li>
-					<li><a href="#">랭킹</a></li>
-					<li><a href="#">모집</a></li>
+					<li><a href="/info">산정보</a></li>
+					<li><a href="/review">등산후기</a></li>
+					<li><a href="/rank">랭킹</a></li>
+					<li><a href="/recruit">모집</a></li>
 				</ul>
 			</nav>
 		</div>
@@ -37,7 +37,7 @@
 		<div>
 			<form action="#" method="get">
 				<button class="search-icon" type="submit"></button>
-				<input type="text" name="search" id="search" placeholder="Search" />
+				<input type="text" name="word" id="search" placeholder="Search" />
 				<button class="cancel" type="reset"></button>
 			</form>
 		</div>
