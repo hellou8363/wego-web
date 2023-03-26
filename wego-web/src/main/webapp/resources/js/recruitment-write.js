@@ -224,7 +224,6 @@ selector(".drag-and-drop").ondrop = (e) => {
 
 // 업로드 파일 용량 체크
 const isFileMaxSize = (file) => {
-  console.log("call isFileMaxSize", file);
   if (file[0].size > 20971520) {
     selector(".drag-and-drop").innerHTML = `
     <p>최대 업로드 용량은 20MB입니다.<br>
@@ -237,7 +236,6 @@ const isFileMaxSize = (file) => {
 
 // 파일형식 체크
 const isWrongFile = (file) => {
-  console.log("call isRightFile", file);
   if (
     file[0].type !== "image/jpeg" &&
     file[0].type !== "image/png" &&
@@ -265,7 +263,6 @@ selector(".drag-and-drop").onclick = () => {
 
   input.addEventListener("input", (e) => {
     const files = e.target.files;
-    console.log("input-file: ", files);
 
     // 업로드 파일 용량 체크
     if (isFileMaxSize(files)) {
@@ -372,6 +369,10 @@ const formCheck = () => {
 
   // 위 필수입력값이 모두 입력되었다면 폼 데이터에 저장
   // 이미지는 업로드와 동시에 바로 폼 데이터에 저장
+  if(selector("#upload").innerText == "수정") {
+	formData.set("sanPartyId", form.elements.sanPartyId.value);
+  } // if
+  
   formData.set("sanName", form.elements.sanName.value);
   formData.set("title", form.elements.title.value);
   formData.set("contents", form.elements.contents.value);
@@ -388,12 +389,14 @@ const formCheck = () => {
 selector(".upload input[type=submit]").onclick = (e) => {
   e.preventDefault();
 
-  fetch("/recruit/register", {
+  fetch(
+	selector("#upload").innerText == "등록" ? 
+	"/recruit/register" : "/recruit/modify", {
     method: "POST",
     body: formData,
   }).then(res => {
-	console.log(res);
-	console.log(res.url);
 	self.location = res.url
 	});
+
+
 };

@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-${recruitment }
+${recruitment }<br>
+<a href="/recruit/modify?sanPartyId=${recruitment.sanPartyId}">수정하기</a>
+<a href="/recruit/remove?sanPartyId=${recruitment.sanPartyId}">삭제하기</a>
 </body>
 </html>

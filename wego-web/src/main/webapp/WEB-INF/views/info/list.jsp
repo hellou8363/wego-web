@@ -43,7 +43,7 @@
 					</div>
 					<!-- Item -->
 					<c:forEach var="item" items="${list}">
-						<a href="/recruit/detail?sanInfoId=${item.sanInfoId}">
+						<a href="/info/detail?sanInfoId=${item.sanInfoId}">
 							<div class="mountain-item">
 								<img class="mountain-img" src="${item.img}" alt="img" />
 								<h3 class="mountain-name" id="mountainName">${item.sanName}</h3>

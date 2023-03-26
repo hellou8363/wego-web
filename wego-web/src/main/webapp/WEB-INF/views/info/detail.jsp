@@ -8,5 +8,6 @@
 </head>
 <body>
 <h1>산정보 상세페이지</h1>
+${sanInfo }
 </body>
 </html>

@@ -50,7 +50,7 @@ public class MountainInfoController {
 		try {
 			MountainInfoViewVO vo = this.service.get(sanInfoId);
 
-			model.addAttribute("vo", vo);
+			model.addAttribute("sanInfo", vo);
 			
 			return "info/detail";
 		} catch (Exception e) {

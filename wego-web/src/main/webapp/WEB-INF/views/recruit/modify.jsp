@@ -26,8 +26,9 @@
 	<div class="total-wrap">
 		<%@include file="/WEB-INF/views/common/header.jsp"%>
 		<section>
-			<form action="/recruit/modify" method="post" enctype="multipart/form-data"
-				class="container">
+			<form action="/recruit/modify" method="post"
+				enctype="multipart/form-data" class="container">
+				  <input type="hidden" name="sanPartyId" value="${recruitment.sanPartyId}">
 				<!-- form 필수값 검증 후 값이 없는 경우 알림 -->
 				<div class="alert-window">
 					<p>
@@ -38,17 +39,17 @@
 				<!-- -------------- alert-end -------------- -->
 				<div class="select-mountain">
 					<span>산이름</span> <select name="sanName" required>
-						<option value="${party.sanInfoId}">${party.sanInfoId}</option>
+						<option value="${recruitment.sanName}">${recruitment.sanName}</option>
 					</select>
 				</div>
 				<div class="title">
 					<label for="title">제목</label> <input type="text" name="title"
 						id="title" placeholder="제목을 입력하세요.(최소 2자 ~ 최대 20자 가능)"
-						maxlength="20" required value=${party.title } />
+						maxlength="20" required value=${recruitment.title } />
 				</div>
 				<div class="detail">
 					<div class="photo">
-						<img src="${party.img}" alt="모집 글 작성 폼 이미지"></img>
+						<img src="${recruitment.img}" alt="모집 글 작성 폼 이미지"></img>
 					</div>
 					<div class="add-photo">
 						<div class="top">
@@ -66,37 +67,37 @@
 					<div class="wrap">
 						<p>
 							<span>날짜</span><input type="date" name="date" id="date" required
-								value=<fmt:formatDate value="${item.partyDate}" pattern="yyyy-MM-dd />" />
+								value=<fmt:formatDate value="${recruitment.partyDate}" pattern="yyyy-MM-dd" /> />
 						</p>
 						<p>
 							<span>시간</span><input type="time" name="time" id="time" required
-								value=<fmt:formatDate value="${item.createDt}" pattern="yyyy-MM-dd" /> />
+								value=<fmt:formatDate value="${recruitment.partyDate}" pattern="HH:mm" /> />
 						</p>
 						<p>
 							<span>참여인원</span><input type="number" name="partyMax" id="member"
-								min="2" max="45" required value=${party.partyMax } />
+								min="2" max="45" required value=${recruitment.partyMax } />
 						</p>
 						<p>
 							<span>준비물</span><input type="text" name="items" id="readyItems"
-								maxlength="1500" value=${party.items } />
+								maxlength="1500" value=${recruitment.items } />
 						</p>
 						<p>
 							<span>등반조건</span><input type="text" name="condition"
-								id="condition" maxlength="1500" value=${party.condition } />
+								id="condition" maxlength="1500" value=${recruitment.condition } />
 						</p>
 					</div>
 				</div>
 				<div class="text">
 					<p>하고 싶은 말</p>
-					<textarea name="contents" id="text" maxlength="2000">${party.contents}</textarea>
+					<textarea name="contents" id="text" maxlength="2000">${recruitment.contents}</textarea>
 				</div>
 				<div class="buttons">
 					<button type="button" id="cancle">취소</button>
-					<button type="button" id="upload">등록</button>
+					<button type="button" id="upload">수정</button>
 				</div>
 				<div class="check-again">
 					<div class="upload">
-						<p>글을 등록하시겠습니까?</p>
+						<p>글을 수정하시겠습니까?</p>
 						<input type="button" value="아니오" /> <input type="submit"
 							value="예" />
 					</div>

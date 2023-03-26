@@ -21,6 +21,7 @@ import org.zerock.wego.service.RecruitmentService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
+
 @Log4j2
 @AllArgsConstructor
 
@@ -45,7 +46,7 @@ public class RecruitmentController {
 		return "recruit/list";
 	} // list
 
-	@GetMapping("/detail")
+	@GetMapping({ "/detail", "/modify" })
 	public void detail(Integer sanPartyId, Model model) throws ControllerException { // 모집글 상세조회 요청처리
 		log.trace("detail({}, {}) invoked.", sanPartyId, model);
 
@@ -76,22 +77,43 @@ public class RecruitmentController {
 
 	@PostMapping("/modify")
 	public String modify(
+			Integer sanPartyId, 
+			String sanName, // 산이름
+			MultipartFile imgFile, // 이미지
 			String date, // 등반일
 			String time, // 등반시간
 			RecruitmentDTO dto, RedirectAttributes rttrs) throws ControllerException { // 모집글 수정 요청처리
 		log.trace("modify({}, {}) invoked.", dto, rttrs);
 
 		try {
+			// 산이름으로 산ID 조회
+			Integer sanId = this.mountainService.selectSanName(sanName);
+			dto.setSanInfoId(sanId);
+
 			// 등반일 + 등반시간(TIMESTAMP 형식에 맞게)
 			String dateTime = date + " " + time + ":00";
 			dto.setPartyDate(dateTime);
+
+			// 기존 이미지 경로를 불러오기(수정은 작성 시 이미지 폴더가 만들어져 있으므로 재 생성 X)
+			String oldImgPath = this.service.get(sanPartyId).getImg();
+			String basePath = "C:/temp/upload";
 			
+			if (imgFile != null && !"".equals(imgFile.getOriginalFilename())) {
+				
+				// 이미지 업로드되면, 기존 이미지에 덮어쓰기
+				imgFile.transferTo(new File(basePath + oldImgPath));
+				dto.setImg(oldImgPath);
+			} else {
+				// 이미지 변경이 없으면 기존 경로 유지(NullPotinerException방지)
+				dto.setImg(oldImgPath);
+			} // if-else
+
 			boolean success = this.service.modify(dto);
 			log.info("modify- success: {}", success);
 
 			rttrs.addAttribute("result", success ? "success" : "failure");
 
-			return "redirect:/recruit";
+			return "redirect:/recruit/detail?sanPartyId=" + dto.getSanPartyId();
 		} catch (Exception e) {
 			throw new ControllerException(e);
 		} // try-catch
