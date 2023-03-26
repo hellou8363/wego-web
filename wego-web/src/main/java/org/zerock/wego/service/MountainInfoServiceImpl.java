@@ -40,7 +40,7 @@ public class MountainInfoServiceImpl
 			throw new ServiceException(e);
 		} // try-catch
 	} // afterPropertiesSet
-
+	
 	
 	@Override
 	public List<MountainInfoViewVO> getList() throws ServiceException {
@@ -53,17 +53,18 @@ public class MountainInfoServiceImpl
 		} // try-catch
 	} // getList
 	
+	
 	@Override
-	public Set<MountainInfoViewVO> get10List() throws ServiceException {
-		log.trace("get10List() invoked.");
+	public Set<MountainInfoViewVO> getRandom10List() throws ServiceException {
+		log.trace("getRandom10List() invoked.");
 		
 		try {
-			return this.mapper.select10();
+			return this.mapper.selectRandom10();
 		} catch (Exception e) {
 			throw new ServiceException(e);
 		} // try-catch
 	} // getList
-
+	
 	
 	@Override
 	public MountainInfoViewVO get(Integer sanInfoId) throws ServiceException {
@@ -75,52 +76,17 @@ public class MountainInfoServiceImpl
 			throw new ServiceException(e);
 		} // try-catch
 	} // get
-//
-//
-//	@Override
-//	public boolean remove(Integer sanPartyId) throws ServiceException {
-//		log.trace("remove({}) invoked.", sanPartyId);
-//		
-//		try {
-//			return this.mapper.delete(sanPartyId) == 1;
-//		} catch (Exception e) {
-//			throw new ServiceException(e);
-//		} // try-catch
-//	} // remove
-//
-//
-//	@Override
-//	public boolean register(RecruitmentDTO dto) throws ServiceException {
-//		log.trace("register({}) invoked.");
-//		
-//		try {
-//			return this.mapper.insert(dto) == 1;
-//		} catch (Exception e) {
-//			throw new ServiceException(e);
-//		} // try-catch
-//	} // register
-//
-//
-//	@Override
-//	public boolean modify(RecruitmentDTO dto) throws ServiceException {
-//		log.trace("modify({}) invoked.");
-//		
-//		try {
-//			return this.mapper.update(dto) == 1;
-//		} catch (Exception e) {
-//			throw new ServiceException(e);
-//		} // try-catch
-//	} // modify
-//	
-//	@Override
-//	public Integer sanNameSelect(String sanName) throws ServiceException {
-//		log.trace("sanNameSelect({}) invoked.", sanName);	
-//		
-//		try {
-//			return this.mapper.sanNameSelect(sanName);
-//		} catch (Exception e) {
-//			throw new ServiceException(e);
-//		} // try-catch
-//	} // sanNameselect
-
+	
+	
+	@Override
+	public Integer selectSanName(String sanName) throws ServiceException {
+		log.trace("selectSanName({}) invoked.", sanName);
+		
+		try {
+			return this.mapper.selectSanName(sanName);
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		} // try-catch
+	} // selectSanName
+	
 } // end class

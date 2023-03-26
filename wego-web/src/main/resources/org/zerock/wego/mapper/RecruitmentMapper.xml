@@ -6,45 +6,56 @@
 
 <mapper namespace="org.zerock.wego.mapper.RecruitmentMapper">
 
-	<select id="select"
-		resultType="org.zerock.wego.domain.RecruitmentVO">
+	<select id="selectRandom10"
+		resultType="org.zerock.wego.domain.RecruitmentViewVO">
 		SELECT *
-		FROM san_party_tb
+		FROM
+			(
+			SELECT *
+			FROM san_party_v
+			ORDER BY dbms_random.random
+			)
+		WHERE rownum &lt;= 10
+	</select>
+
+	<select id="select"
+		resultType="org.zerock.wego.domain.RecruitmentViewVO">
+		SELECT *
+		FROM san_party_v
 		WHERE san_party_id = #{sanPartyId}
 	</select>
 
 	<delete id="delete">
-		DELETE FROM san_party_tb WHERE san_party_id =
-		#{sanPartyId}
+		DELETE FROM san_party_tb 
+		WHERE san_party_id = #{sanPartyId}
 	</delete>
 
 	<insert id="insert">
-		INSERT INTO san_party_tb(san_info_id, user_id, title, contents, img,
-		party_date, party_max, items, condition)
-		VALUES(#{sanInfoId}, #{userId}, #{title}, #{contents}, #{img},
-		#{partyDate}, #{partyMax}, #{items}, #{condition})
+		INSERT INTO 
+			san_party_tb(
+				san_info_id, user_id, title, contents, img,
+				party_date, party_max, items, condition
+			)
+			VALUES(
+				#{sanInfoId}, #{userId}, #{title}, #{contents}, #{img},
+				#{partyDate}, #{partyMax}, #{items}, #{condition}
+			)
 	</insert>
 
 	<update id="update">
 		UPDATE san_party_tb
 		SET
-		san_info_id = #{sanInfoId},
-		title = #{title},
-		contents = #{contents},
-		img = #{img},
-		party_date = #{partyDate},
-		party_max = #{partyMax},
-		items = #{items},
-		condition = #{condition},
-		modified_dt = current_timestamp
+			san_info_id = #{sanInfoId},
+			title = #{title},
+			contents = #{contents},
+			img = #{img},
+			party_date = #{partyDate},
+			party_max = #{partyMax},
+			items = #{items},
+			condition = #{condition},
+			modified_dt = current_timestamp
 		WHERE
-		san_party_id = #{sanPartyId}
+			san_party_id = #{sanPartyId}
 	</update>
 
-	<select id="sanNameSelect"
-		resultType="Integer">
-		SELECT san_info_id
-		FROM san_info_tb
-		WHERE san_name = #{sanName}
-	</select>
 </mapper>

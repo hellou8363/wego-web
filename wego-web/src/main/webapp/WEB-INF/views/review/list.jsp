@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -46,7 +47,7 @@
 					</div>
 					<!-- Item -->
 					<c:forEach var="item" items="${list}">
-						<a href="/recruit/detail?sanPartyId=${item.sanReviewId}">
+						<a href="/review/detail?sanReviewId=${item.sanReviewId}">
 							<div class="review-item">
 								<img class="user-img" src="${item.userPic}" alt="img" />
 								<p class="user-name" id="userName">${item.nickName}</p>
@@ -59,7 +60,9 @@
 										class="favorite"></button>
 									<span class="favorite-count">${item.likeCnt}</span>
 								</form>
-								<p class="review-date" id="date"><fmt:formatDate value="${item.createDt}" pattern="yyyy-MM-dd" /></p>
+								<p class="review-date" id="date">
+									<fmt:formatDate value="${item.createDt}" pattern="yyyy-MM-dd" />
+								</p>
 							</div> <!-- review-item -->
 						</a>
 					</c:forEach>
@@ -68,8 +71,10 @@
 		</section>
 		<!-- main end -->
 		<!-- 리모컨 -->
-		<a href="/review/write" class="add-item"> <img src="/resources/svg/add-item.svg">
-		</a> <a href="#" class="scrollToTop"> <img src="/resources/svg/top.svg">
+		<a href="/review/write" class="add-item"> <img
+			src="/resources/svg/add-item.svg">
+		</a> <a href="#" class="scrollToTop"> <img
+			src="/resources/svg/top.svg">
 		</a>
 	</div>
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>

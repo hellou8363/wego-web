@@ -30,6 +30,15 @@ section div>h2 {
 	scroll-behavior: auto;
 }
 
+.mountain-name, .recruit-title, .review-title {
+	display: -webkit-box;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: normal;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+}
+
 .wrap::-webkit-scrollbar {
 	display: none;
 }
@@ -116,14 +125,15 @@ section div>h2 {
 	box-sizing: border-box;
 }
 
-@keyframes fadein {
-	from { opacity:0;
+@
+keyframes fadein {from { opacity:0;
 	
-	}
+}
 
-	to {
+to {
 	opacity: 1;
-	}
+}
+
 }
 .rank #rankers .item {
 	display: flex;
@@ -235,7 +245,6 @@ section div>h2 {
 }
 
 #text {
-	white-space: nowrap;
 	display: -webkit-box;
 	overflow: hidden;
 	text-overflow: ellipsis;

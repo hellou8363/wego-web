@@ -2,12 +2,12 @@ package org.zerock.wego.service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.zerock.wego.domain.RecruitmentDTO;
-import org.zerock.wego.domain.RecruitmentVO;
 import org.zerock.wego.domain.RecruitmentViewVO;
 import org.zerock.wego.exception.ServiceException;
 import org.zerock.wego.mapper.RecruitmentMapper;
@@ -56,7 +56,19 @@ public class RecruitmentServiceImpl
 
 	
 	@Override
-	public RecruitmentVO get(Integer sanPartyId) throws ServiceException {
+	public Set<RecruitmentViewVO> getRandom10List() throws ServiceException {
+		log.trace("getRandom10List() invoked.");
+		
+		try {
+			return this.mapper.selectRandom10();
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		} // try-catch
+	} // getList
+	
+	
+	@Override
+	public RecruitmentViewVO get(Integer sanPartyId) throws ServiceException {
 		log.trace("get({}) invoked.", sanPartyId);	
 		
 		try {
@@ -101,16 +113,5 @@ public class RecruitmentServiceImpl
 			throw new ServiceException(e);
 		} // try-catch
 	} // modify
-	
-	@Override
-	public Integer sanNameSelect(String sanName) throws ServiceException {
-		log.trace("sanNameSelect({}) invoked.", sanName);	
-		
-		try {
-			return this.mapper.sanNameSelect(sanName);
-		} catch (Exception e) {
-			throw new ServiceException(e);
-		} // try-catch
-	} // sanNameselect
 
 } // end class

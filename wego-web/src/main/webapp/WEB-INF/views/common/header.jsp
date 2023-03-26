@@ -35,9 +35,9 @@
 	</div>
 	<div class="search-bar">
 		<div>
-			<form action="#" method="get">
+			<form action="/search" method="get">
 				<button class="search-icon" type="submit"></button>
-				<input type="text" name="word" id="search" placeholder="Search" />
+				<input type="text" name="search" id="search" placeholder="Search" />
 				<button class="cancel" type="reset"></button>
 			</form>
 		</div>

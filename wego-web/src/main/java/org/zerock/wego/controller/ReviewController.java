@@ -45,7 +45,7 @@ public class ReviewController {
 		log.trace("detail({}, {}) invoked.", sanReviewId, model);
 
 		try {
-			ReviewVO vo = this.service.get(sanReviewId);
+			ReviewViewVO vo = this.service.get(sanReviewId);
 
 			model.addAttribute("review", vo);
 		} catch (Exception e) {

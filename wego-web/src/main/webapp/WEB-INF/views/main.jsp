@@ -29,7 +29,7 @@
 			<div class="rank">
 				<div class="rankers">
 					<div class="boxStyle" id="rankBox">
-						<a href="#"> <!-- ranker detaile -->
+						<a href="#"> <!-- ranker detail -->
 							<div class="boxStyle" id="rankers" style="display: none">
 								<div class="item" id="silver">
 									<div class="rankerMedal">🥈</div>

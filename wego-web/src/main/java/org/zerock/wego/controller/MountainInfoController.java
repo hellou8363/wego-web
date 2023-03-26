@@ -25,7 +25,7 @@ import lombok.extern.log4j.Log4j2;
 
 @RequestMapping("/info") // BASE URL
 @Controller
-public class InfoController {
+public class MountainInfoController {
 	private MountainInfoService service;
 	
 	@GetMapping("") // http://eunhye:8080
@@ -44,25 +44,27 @@ public class InfoController {
 	
 	
 	@GetMapping("/detail")
-	public void detail(Integer sanReviewId, Model model) throws ControllerException { // 후기글 상세조회 요청처리
-		log.trace("detail({}, {}) invoked.", sanReviewId, model);
+	public String detail(Integer sanInfoId, Model model) throws ControllerException { // 후기글 상세조회 요청처리
+		log.trace("detail({}, {}) invoked.", sanInfoId, model);
 
 		try {
-			MountainInfoViewVO vo = this.service.get(sanReviewId);
+			MountainInfoViewVO vo = this.service.get(sanInfoId);
 
 			model.addAttribute("vo", vo);
+			
+			return "info/detail";
 		} catch (Exception e) {
 			throw new ControllerException(e);
 		} // try-catch
 	} // detail
 	
-//	@GetMapping("/search") // http://eunhye:8080/search?search=한라산
-//	public String searchResult(String search) {
-//		log.trace("searchResult({}) invoked.", search);
-//		
-//		// TODO: 산정보, 모집글, 후기글의 제목을 조회하여 반환
-//		
-//		return "searchResult";
-//	} // searchResult
+	@GetMapping("/search")
+	public String searchResult(String search, Model model) {
+		log.trace("searchResult({}) invoked.", search);
+
+		// TODO: 산정보, 모집글, 후기글의 제목을 조회하여 반환
+
+		return "searchResult";
+	} // searchResult
 
 } // end class
