@@ -30,7 +30,7 @@ section div>h2 {
 	scroll-behavior: auto;
 }
 
-.mountain-name, .recruit-title, .review-title {
+.recruit-title, .review-title {
 	display: -webkit-box;
 	overflow: hidden;
 	text-overflow: ellipsis;

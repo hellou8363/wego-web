@@ -34,11 +34,11 @@
 		INSERT INTO 
 			san_party_tb(
 				san_info_id, user_id, title, contents, img,
-				party_date, party_max, items, condition
+				party_dt, party_max, items, condition
 			)
 			VALUES(
 				#{sanInfoId}, #{userId}, #{title}, #{contents}, #{img},
-				#{partyDate}, #{partyMax}, #{items}, #{condition}
+				#{partyDt}, #{partyMax}, #{items}, #{condition}
 			)
 	</insert>
 
@@ -49,7 +49,7 @@
 			title = #{title},
 			contents = #{contents},
 			img = #{img},
-			party_date = #{partyDate},
+			party_dt = #{partyDt},
 			party_max = #{partyMax},
 			items = #{items},
 			condition = #{condition},

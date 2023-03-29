@@ -18,7 +18,7 @@ public class RecruitmentViewVO {
 	private String title; // 제목
 	private String contents; // 내용
 	private String img; // 모집글 이미지
-	private Date partyDate; // 모집글 등반일(yyyy-MM-dd HH:mm)
+	private Date partyDt; // 모집글 등반일(yyyy-MM-dd HH:mm)
 	private Integer partyMax; // 최대 인원
 	private Integer userCnt; // 참여 인원
 	private String items; // 준비물

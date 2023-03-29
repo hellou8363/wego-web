@@ -1,7 +1,10 @@
 package org.zerock.wego.controller;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -47,7 +50,7 @@ public class RecruitmentController {
 	} // list
 
 	@GetMapping({ "/detail", "/modify" })
-	public void detail(Integer sanPartyId, Model model) throws ControllerException { // 모집글 상세조회 요청처리
+	public void detail(Integer sanPartyId, Model model) throws ControllerException { // 모집글 상세조회 및 수정 요청처리
 		log.trace("detail({}, {}) invoked.", sanPartyId, model);
 
 		try {
@@ -76,8 +79,7 @@ public class RecruitmentController {
 	} // remove
 
 	@PostMapping("/modify")
-	public String modify(
-			Integer sanPartyId, 
+	public String modify(Integer sanPartyId, // 모집글 번호
 			String sanName, // 산이름
 			MultipartFile imgFile, // 이미지
 			String date, // 등반일
@@ -92,17 +94,42 @@ public class RecruitmentController {
 
 			// 등반일 + 등반시간(TIMESTAMP 형식에 맞게)
 			String dateTime = date + " " + time + ":00";
-			dto.setPartyDate(dateTime);
+			dto.setPartyDt(dateTime);
 
 			// 기존 이미지 경로를 불러오기(수정은 작성 시 이미지 폴더가 만들어져 있으므로 재 생성 X)
-			String oldImgPath = this.service.get(sanPartyId).getImg();
-			String basePath = "C:/temp/upload";
-			
-			if (imgFile != null && !"".equals(imgFile.getOriginalFilename())) {
-				
-				// 이미지 업로드되면, 기존 이미지에 덮어쓰기
-				imgFile.transferTo(new File(basePath + oldImgPath));
-				dto.setImg(oldImgPath);
+			RecruitmentViewVO currentPostInfo = this.service.get(sanPartyId);
+			String oldImgPath = currentPostInfo.getImg();
+			String basePath = "C:/upload";
+
+			if (imgFile != null && !"".equals(imgFile.getOriginalFilename())) { // 기존 이미지 경로에 덮어쓰기
+
+				// 기존 이미지가 디폴트 이미지일 경우
+				if (oldImgPath.contains("defaultImg")) {
+					Date currentPostCreatedDate = currentPostInfo.getCreateDt(); // 현재 모집글의 작성일자 불러오기
+
+					String createdDate = new SimpleDateFormat("yyyyMMdd").format(currentPostCreatedDate);
+
+					// DB에 저장할 원본파일명 및 UUID
+					String originalName = imgFile.getOriginalFilename();
+					String uuid = UUID.randomUUID().toString();
+
+					log.info("originalName: {}", originalName); // 도구리-배경화면.png
+					log.info("uuid: {}", uuid); // fb1b2f54-5a05-4d46-a77b-893b2c9909c7
+
+					// MIME타입 추출
+					String imgType = imgFile.getContentType();
+					log.trace("imgType: {}", imgType); // imgType: image/png
+					
+					// TODO: DB에 원본파일명, UUID, 절대경로 INSERT 필요
+
+					// 이미지 경로 설정
+					String imgPath = basePath + "/" + createdDate + "/" + uuid;
+					imgFile.transferTo(new File(imgPath)); // C:/upload/20230327/UUID
+
+					dto.setImg(imgPath);
+
+					log.trace("이미지 파일 로컬 저장 성공!!");
+				} // if
 			} else {
 				// 이미지 변경이 없으면 기존 경로 유지(NullPotinerException방지)
 				dto.setImg(oldImgPath);
@@ -136,46 +163,52 @@ public class RecruitmentController {
 			// 산이름으로 산ID 조회
 			Integer sanId = this.mountainService.selectSanName(sanName);
 			dto.setSanInfoId(sanId);
-		} catch (Exception e) {
-			throw new ControllerException(e);
-		} // try-catch
 
-		Integer userId = 9; // 테스트용 유저 ID
-		dto.setUserId(userId);
+			// 테스트용 유저 ID
+			Integer userId = 9;
+			dto.setUserId(userId);
 
-		// 등반일 + 등반시간(TIMESTAMP 형식에 맞게)
-		String dateTime = date + " " + time + ":00";
-		dto.setPartyDate(dateTime);
+			// 등반일 + 등반시간(TIMESTAMP 형식에 맞게)
+			String dateTime = date + " " + time + ":00";
+			dto.setPartyDt(dateTime);
 
-		// 첨부파일 저장을 위한 디렉터리 생성
-		LocalDate today = LocalDate.now();
+			// 첨부파일 저장을 위한 디렉터리 생성
+			String today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
 
-		String basePath = "C:/temp/upload";
-		File Folder = new File(basePath + "/img/" + today);
+			// 첨부파일 Base경로 지정
+			String basePath = "C:/upload/" + today;
+			File Folder = new File(basePath); // C:/upload/20230327
 
-		if (!Folder.exists()) { // 해당 디렉터리가 없을 경우 생성
-			try {
+			if (!Folder.exists()) { // 해당 디렉터리가 없을 경우 생성
 				Folder.mkdir(); // 폴더 생성
-			} catch (Exception e) {
-				throw new ControllerException(e);
-			} // try-catch
-		} // if
+				log.trace("----------폴더생성---------");
+			} // if
 
-		try {
 			// 첨부 이미지가 있다면 저장
 			if (imgFile != null && !"".equals(imgFile.getOriginalFilename())) {
 
+				// DB에 저장할 원본파일명 및 UUID
+				String originalName = imgFile.getOriginalFilename();
+				String uuid = UUID.randomUUID().toString();
+
+				log.info("originalName: {}", originalName); // 도구리-배경화면.png
+				log.info("uuid: {}", uuid); // fb1b2f54-5a05-4d46-a77b-893b2c9909c7
+
+				// MIME타입 추출
+				String imgType = imgFile.getContentType();
+				log.trace("imgType: {}", imgType); // imgType: image/png
+				
+				// TODO: DB에 원본파일명, UUID, 절대경로 INSERT 필요
+
 				// 이미지 경로 설정
-				String extension = imgFile.getOriginalFilename()
-						.substring(imgFile.getOriginalFilename().lastIndexOf("."));
-				String imgPath = "/img/" + today + "/" + UUID.randomUUID().toString() + extension;
-				imgFile.transferTo(new File(basePath + imgPath));
+				String imgPath = basePath + "/" + uuid;
+				imgFile.transferTo(new File(imgPath));
 
 				log.trace("이미지 파일 로컬 저장 성공!!");
 
 				dto.setImg(imgPath);
 			} else {
-				String defaultPath = "/img/defaultImg.png";
+				String defaultPath = basePath + "defaultImg.png";
 				dto.setImg(defaultPath);
 			} // if-else
 
@@ -184,7 +217,6 @@ public class RecruitmentController {
 
 			rttrs.addFlashAttribute("sanPartyId", dto.getSanPartyId());
 
-			log.trace("========== OKOKOKOKOKOK =======");
 			return "redirect:/recruit";
 		} catch (Exception e) {
 			throw new ControllerException(e);

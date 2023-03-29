@@ -1,5 +1,7 @@
 package org.zerock.wego.controller;
 
+import java.io.File;
+import java.util.Base64;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -7,9 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.wego.domain.ReviewDTO;
-import org.zerock.wego.domain.ReviewVO;
 import org.zerock.wego.domain.ReviewViewVO;
 import org.zerock.wego.exception.ControllerException;
 import org.zerock.wego.service.ReviewService;
@@ -90,15 +92,21 @@ public class ReviewController {
 	} // write
 
 	@PostMapping("/register")
-	public String recruitmentUpload(
-			ReviewDTO dto, RedirectAttributes rttrs) throws ControllerException {
-		log.trace("register({}, {}) invoked.", dto, rttrs);
+	public void recruitmentUpload(String sanName, String title, String contents, String imgFile, RedirectAttributes rttrs) throws ControllerException {
+//		log.trace("register({}, {}, {}, {}, {}) invoked.", sanName, title, contents, imgFile, rttrs);
+		log.trace("sanName: {}", sanName);
+		log.trace("title: {}", title);
+		log.trace("contents: {}", contents);
+		log.trace("imgFile: {}", imgFile);
+		
 
+		// 산이름으로 산ID조회 => sanName
+		// 제목은 그대로 저장
+
+		// TODO: 프론트에서 base64를 MultipartFile로 변환해서 서버로 넘길것
 		
-		// TODO: 최종보스 - 사진, 글 혼합 데이터 처리 필요
 		
-		
-		return "redirect:/review";
+//		return "redirect:/review";
 	} // recruitmentUpload
 
 } // end class

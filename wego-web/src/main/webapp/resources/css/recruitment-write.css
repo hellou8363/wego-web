@@ -89,6 +89,7 @@ label[for="title"] {
 	background-repeat: no-repeat;
 	background-size: 250px;
 	border-radius: 50%;
+	position: relative;
 }
 
 .photo>img {
@@ -289,6 +290,19 @@ label[for="title"] {
 	align-items: center;
 	text-align: center;
 	gap: 10px;
+}
+
+.img-upload-cancle {
+	width: 20px;
+	height: 20px;
+	border: 0;
+	background: url(../svg/x-symbol.svg);
+	background-repeat: no-repeat;
+	background-size: contain;
+	position: absolute;
+	right: 30px;
+	top: 20px;
+	z-index: 1;
 }
 
 @media screen and (min-width: 750px) and (max-width: 1050px) {

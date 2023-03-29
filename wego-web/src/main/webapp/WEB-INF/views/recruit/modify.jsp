@@ -45,7 +45,7 @@
 				<div class="title">
 					<label for="title">제목</label> <input type="text" name="title"
 						id="title" placeholder="제목을 입력하세요.(최소 2자 ~ 최대 20자 가능)"
-						maxlength="20" required value=${recruitment.title } />
+						maxlength="20" required value="${recruitment.title}" />
 				</div>
 				<div class="detail">
 					<div class="photo">
@@ -67,23 +67,23 @@
 					<div class="wrap">
 						<p>
 							<span>날짜</span><input type="date" name="date" id="date" required
-								value=<fmt:formatDate value="${recruitment.partyDate}" pattern="yyyy-MM-dd" /> />
+								value=<fmt:formatDate value="${recruitment.partyDt}" pattern="yyyy-MM-dd" /> />
 						</p>
 						<p>
 							<span>시간</span><input type="time" name="time" id="time" required
-								value=<fmt:formatDate value="${recruitment.partyDate}" pattern="HH:mm" /> />
+								value=<fmt:formatDate value="${recruitment.partyDt}" pattern="HH:mm" /> />
 						</p>
 						<p>
 							<span>참여인원</span><input type="number" name="partyMax" id="member"
-								min="2" max="45" required value=${recruitment.partyMax } />
+								min="2" max="45" required value="${recruitment.partyMax}" />
 						</p>
 						<p>
 							<span>준비물</span><input type="text" name="items" id="readyItems"
-								maxlength="1500" value=${recruitment.items } />
+								maxlength="1500" value="${recruitment.items }" />
 						</p>
 						<p>
 							<span>등반조건</span><input type="text" name="condition"
-								id="condition" maxlength="1500" value=${recruitment.condition } />
+								id="condition" maxlength="1500" value="${recruitment.condition}" />
 						</p>
 					</div>
 				</div>

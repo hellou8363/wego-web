@@ -188,11 +188,11 @@
 								<p class="recruit-title" id="title">${item.title}</p>
 								<p class="recruit-schedule-schedule">날짜:</p>
 								<p class="recruit-schedule" id="schedule">
-									<fmt:formatDate value="${item.partyDate}" pattern="yyyy-MM-dd" />
+									<fmt:formatDate value="${item.partyDt}" pattern="yyyy-MM-dd" />
 								</p>
 								<p class="recruit-schedule-time">시간:</p>
 								<p class="recruit-time" id="time">
-									<fmt:formatDate value="${item.partyDate}" pattern="HH:mm" />
+									<fmt:formatDate value="${item.partyDt}" pattern="HH:mm" />
 								</p>
 								<p class="recruit-schedule-member">참여 인원:</p>
 								<p class="recruit-member" id="memberCount">${item.userCnt}/

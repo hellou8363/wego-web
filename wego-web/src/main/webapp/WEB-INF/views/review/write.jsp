@@ -34,7 +34,7 @@
 				</div>
 				<!-- -------------- alert-end -------------- -->
 				<div class="select-mountain">
-					<span>산이름</span> <select name="mountainName" required>
+					<span>산이름</span> <select name="sanName" required>
 						<option value="">산이름을 선택하세요.</option>
 					</select>
 				</div>
@@ -58,7 +58,7 @@
 						</div>
 						<button type="button">등록</button>
 					</div>
-					<div contenteditable="true" name="text" id="text" maxlength="2000"></div>
+					<div contenteditable="true" name="contents" id="contents"></div>
 				</div>
 				<div class="buttons">
 					<button type="button" id="cancle">취소</button>

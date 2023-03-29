@@ -27,7 +27,7 @@
   background: url(../img/bottom-arrow.png);
   background-repeat: no-repeat;
 }
-select[name="mountainName"] {
+select[name="sanName"] {
   width: 208px;
   height: 40px;
   padding: 4px 10px 6px 8px;
@@ -35,11 +35,11 @@ select[name="mountainName"] {
   border-bottom: 1px solid lightgray;
   margin-left: 18px;
   position: relative;
-  z-index: 1;
   background-color: #ffffff00;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  z-index: 1;
 }
 label[for="title"] {
   margin-left: 14px;
@@ -66,7 +66,7 @@ label[for="title"] {
   background-size: 20px;
   cursor: pointer;
 }
-#text {
+#contents {
   width: 100%;
   height: 600px;
   border: 0;
@@ -77,9 +77,6 @@ label[for="title"] {
   overflow: scroll;
   overflow-x: hidden;
 }
-/* .text > p {
-  font-weight: bold;
-} */
 .buttons {
   display: flex;
   justify-content: right;
@@ -115,6 +112,7 @@ label[for="title"] {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 2;
 }
 .top {
   display: flex;
