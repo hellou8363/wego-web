@@ -18,6 +18,9 @@
 		up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 	<resources mapping="/views/**" location="/WEB-INF/views/" />
+	
+	<!-- 로컬 이미지를 불러오기 위한 설정 -->
+	<resources mapping="/img/**" location="file:///C:/upload/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
 		in the /WEB-INF/views directory -->
@@ -47,10 +50,8 @@
 			value="20971520" /> <!-- 20MB -->
 		<beans:property name="preserveFilename" value="true" />
 		<beans:property name="uploadTempDir"
-			value="file:/C:/tmp/" />
+			value="file:/C:/upload/" />
 	</beans:bean>
 
-	<!-- 로컬 이미지를 불러오기 위한 설정 -->
-	<resources mapping="/img/**" location="file:///C:/temp/upload/img/" />
 
 </beans:beans>

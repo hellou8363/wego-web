@@ -105,7 +105,7 @@ const mountains = [
 mountains.map(
   (value, index) =>
     (selector(".select-mountain select").innerHTML += `<option value="${
-      index + 1
+      value
     }">${value}</option>`)
 );
 
@@ -116,9 +116,6 @@ document.forms[0].addEventListener("keydown", (e) => {
     return false;
   } // if
 });
-
-// search-bar 제거
-selector(".search-bar").remove();
 
 // ========================= 취소 이벤트
 
@@ -164,9 +161,7 @@ selector(".add-photo .cancel").addEventListener("click", () => {
 });
 
 // ========================= 추가 이벤트
-
-// 이미지 추가 버튼 클릭 이벤트
-// 이미지는 최대 5장 추가 가능으로 counter변수 필요
+// 이미지 추가 버튼 클릭 이벤트(후기는 최대 5장 추가 가능)
 selector(".photo").addEventListener("click", () => {
   selector(".drag-and-drop").innerHTML = `
   <div class="picture"></div>
@@ -182,7 +177,6 @@ selector(".photo").addEventListener("click", () => {
 
 // ========================= 이미지 업로드 이벤트(드래그 드롭 & 클릭)
 // ========================= 드래그 앤 드롭 이벤트
-
 // 드래그 앤 드롭으로 파일 업로드 하기 위한 기본 이벤트 방지
 selector(".drag-and-drop").ondragover = (e) => e.preventDefault();
 selector(".drag-and-drop").ondragleave = (e) => e.preventDefault();
@@ -219,6 +213,7 @@ selector(".drag-and-drop").onclick = () => {
 
   input.addEventListener("input", (e) => {
     const files = e.target.files;
+    console.log("input-file: ", files);
 
     // 업로드 파일 용량 체크
     if (isFileMaxSize(files)) {
@@ -230,7 +225,7 @@ selector(".drag-and-drop").onclick = () => {
       return false;
     } // if
 
-    selector(".drag-and-drop").innerHTML = `<p>${files[0].name}</p>`; // 파일명 표시
+    selector(".drag-and-drop").innerHTML = `<p>${e.target.files[0].name}</p>`; // 파일명 표시
 
     handleUpdate([...files]);
   });
@@ -243,7 +238,7 @@ selector(".drag-and-drop + button").onclick = (e) => {
   } // if
 
   selector(".add-photo").style.display = "none";
-  selector("#contents").innerHTML += imgPath ?? "";
+  selector("#contents").innerHTML += `${imgPath}<div><br></div>`;
 
   imgPath = null;
 };
@@ -251,6 +246,7 @@ selector(".drag-and-drop + button").onclick = (e) => {
 // ========================= 업로드 파일 용량 및 형식 이벤트
 // 업로드 파일 용량 체크
 const isFileMaxSize = (file) => {
+  console.log("call isFileMaxSize", file);
   if (file[0].size > 20971520) {
     selector(".drag-and-drop").innerHTML = `
     <p>최대 업로드 용량은 20MB입니다.<br>
@@ -263,6 +259,7 @@ const isFileMaxSize = (file) => {
 
 // 파일형식 체크
 const isWrongFile = (file) => {
+  console.log("call isRightFile", file);
   if (
     file[0].type !== "image/jpeg" &&
     file[0].type !== "image/png" &&
@@ -280,13 +277,17 @@ const isWrongFile = (file) => {
 };
 
 // 업로드 이미지를 화면에 썸네일처럼 보여주기 위한 imgPath에 담기
+const imgFiles = {}; // 업로드 이미지들을 저장할 객체
 let imgPath; // 업로드 이미지 임시 저장 변수
 const handleUpdate = (files) => {
+  imgFiles[`${files[0].name}`] = files[0];
+
   files.forEach((file) => {
     const reader = new FileReader();
 
     reader.addEventListener("load", (e) => {
-      imgPath = `<img src="${e.target.result}" alt="${e.target.name}"></img>`;
+      console.log("e.target", e.target);
+      imgPath = `<img src="${e.target.result}" alt="${files[0].name}"></img>`;
     });
 
     reader.readAsDataURL(file);
@@ -295,14 +296,6 @@ const handleUpdate = (files) => {
 
 // ========================= 폼 데이터
 const formData = new FormData(); // FormDate
-
-// // ------------- TEST -----------------
-// // const text1 = selector("#text").innerText;
-// const text = document.querySelector("#text");
-// // console.log(text.childNodes);
-// text.childNodes.forEach((value, key, parent) => console.log("value: ", value, "key: ", key, "parent: ", parent));
-
-// // --------------------------------------
 
 // 등록 버튼 클릭 시 폼 검증 이벤트
 selector("#upload").onclick = (e) => {
@@ -347,11 +340,33 @@ const formCheck = () => {
   // TODO: 내용 문자 길이 체크
 
   // 위 필수입력값이 모두 입력되었다면 폼 데이터에 저장
-  // 이미지는 업로드와 동시에 바로 폼 데이터에 저장
+  // 내용을 순회하면서 img태그의 위치에 <img>삽입
+  const contentChildNodes = selector("#contents").childNodes;
+  let contentResult = ""; // formData에 contents로 담을 텍스트
+  const imgFileNames = []; // 이미지 파일명 저장(중간 제거된 이미지 유무를 위함)
+  for (let i = 0; i < contentChildNodes.length; i++) {
+    if (contentChildNodes[i].nodeName === "IMG") {
+      contentResult += "<img>";
+      imgFileNames.push(contentChildNodes[i].alt); // 
+      continue;
+    } // if
+    if (contentChildNodes[i].nodeName === "#text") {
+      contentResult += contentChildNodes[i].nodeValue;
+      continue;
+    } // if
+    contentResult += contentChildNodes[i].innerText;
+  } // for
+
+  // 폼 데이터 저장(산이름, 제목, 내용)
   formData.set("sanName", form.elements.sanName.value);
   formData.set("title", form.elements.title.value);
-  formData.set("contents", selector("#contents").innerText);
-  formData.set("imgFile", selector("#contents img"), );
+  formData.set("contents", contentResult);
+
+  for (let key in imgFiles) {
+    if(imgFileNames.includes(imgFiles[key].name)) {
+      formData.append("imgFiles", imgFiles[key]);
+    } // if
+  } // for
 
   return true;
 };
@@ -360,8 +375,8 @@ const formCheck = () => {
 selector(".upload input[type=submit]").onclick = (e) => {
   e.preventDefault();
 
-   fetch("/review/register", {
-     method: "POST",
-     body: formData,
-   }).then((res) => (window.location.replace = res.url));
+  fetch("/review/register", {
+    method: "POST",
+    body: formData,
+  }).then((res) => (window.location.replace = res.url));
 };

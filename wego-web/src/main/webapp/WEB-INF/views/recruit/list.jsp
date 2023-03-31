@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -50,7 +51,7 @@
 							<img class="user-img" src="${item.userPic} alt="img" />
 							<p class="user-name" id="userName">${item.nickName}</p>
 							<p class="mountain-name" id="mountainName">${item.sanName}</p>
-							<img class="recruit-img" src="${item.img}" alt="img" />
+							<img class="recruit-img" src="/img/${fn:substring(item.partyPic, 10, 55)}" alt="img" />
 							<p class="recruit-title" id="title">${item.title}</p>
 							<p class="recruit-schedule-schedule">날짜:</p>
 							<p class="recruit-schedule" id="schedule"><fmt:formatDate value="${item.partyDt}" pattern="yyyy-MM-dd" /></p>

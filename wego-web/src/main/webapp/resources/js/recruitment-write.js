@@ -104,9 +104,6 @@ const mountains = [
 let imgPath; // 업로드 이미지 임시 저장 변수
 const formData = new FormData(); // FormDate
 
-// search-bar 제거
-selector(".search-bar").remove();
-
 // Enter키로 인한 submit 방지 이벤트
 document.forms[0].addEventListener("keydown", (e) => {
   if (e.key === "Enter" && e.target.id !== "text") {
@@ -315,7 +312,7 @@ selector(".drag-and-drop + button").onclick = (e) => {
   } // if
 
   selector(".add-photo").style.display = "none";
-  selector(".photo").innerHTML += imgPath + `<button type="button" class="img-upload-cancle"></button>`;
+  selector(".photo").innerHTML = imgPath + `<button type="button" class="img-upload-cancle"></button>`;
 
   imgPath = null;
 };

@@ -29,10 +29,14 @@
 		#{sanReviewId}
 	</delete>
 
-	<insert id="insert">
+	<insert id="insert" parameterType="org.zerock.wego.domain.ReviewDTO">
 		INSERT INTO 
 			san_review_tb(san_info_id, user_id, title, contents)
 			VALUES(#{sanInfoId}, #{userId}, #{title}, #{contents})
+		<selectKey keyProperty="sanReviewId" resultType="int" order="AFTER" >
+			SELECT max(san_review_id)
+			FROM san_review_tb
+		</selectKey>
 	</insert>
 
 	<update id="update">

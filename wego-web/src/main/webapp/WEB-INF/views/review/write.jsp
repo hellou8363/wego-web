@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="/resources/css/header.css" />
 <link rel="stylesheet" href="/resources/css/footer.css" />
 <link rel="stylesheet" href="/resources/css/review-write.css" />
-<script src="/resources/js/header.js" defer></script>
+<script src="/resources/js/noSearchHeader.js" defer></script>
 <script src="/resources/js/review-write.js" defer></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
@@ -22,7 +22,7 @@
 </head>
 <body>
 	<div class="total-wrap">
-		<%@include file="/WEB-INF/views/common/header.jsp"%>
+		<%@include file="/WEB-INF/views/common/noSearchHeader.jsp"%>
 		<section>
 			<form action="#" method="post" class="container">
 				<!-- form 필수값 검증 후 값이 없는 경우 알림 -->

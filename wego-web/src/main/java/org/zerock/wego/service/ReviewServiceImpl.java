@@ -78,7 +78,6 @@ public class ReviewServiceImpl
 		} // try-catch
 	} // get
 	
-	
 	@Override
 	public boolean remove(Integer sanReviewId) throws ServiceException {
 		log.trace("remove({}) invoked.", sanReviewId);

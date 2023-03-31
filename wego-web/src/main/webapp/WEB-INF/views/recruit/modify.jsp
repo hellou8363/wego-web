@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -22,13 +23,14 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.0/jquery-migrate.min.js"></script>
 </head>
-<body>
+<body>	
 	<div class="total-wrap">
 		<%@include file="/WEB-INF/views/common/header.jsp"%>
 		<section>
 			<form action="/recruit/modify" method="post"
 				enctype="multipart/form-data" class="container">
-				  <input type="hidden" name="sanPartyId" value="${recruitment.sanPartyId}">
+				<input type="hidden" name="sanPartyId"
+					value="${recruitment.sanPartyId}">
 				<!-- form 필수값 검증 후 값이 없는 경우 알림 -->
 				<div class="alert-window">
 					<p>
@@ -49,7 +51,7 @@
 				</div>
 				<div class="detail">
 					<div class="photo">
-						<img src="${recruitment.img}" alt="모집 글 작성 폼 이미지"></img>
+						<img src="/img/${fn:substring(recruitment.partyPic, 10, 55)}"></img>
 					</div>
 					<div class="add-photo">
 						<div class="top">

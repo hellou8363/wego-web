@@ -62,7 +62,7 @@
 									<img class="user-img" src="${item.userPic}" alt="img" />
 									<p class="user-name" id="userName">${item.nickName}</p>
 									<p class="mountain-name" id="mountainName">${item.sanName}</p>
-									<img class="recruit-img" src="${item.img}" alt="img" />
+									<img class="recruit-img" src="" alt="img" />
 									<p class="recruit-title" id="title">${item.title}</p>
 									<p class="recruit-schedule-schedule">날짜:</p>
 									<p class="recruit-schedule" id="schedule">

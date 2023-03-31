@@ -26,20 +26,24 @@
 	</select>
 
 	<delete id="delete">
-		DELETE FROM san_party_tb 
+		DELETE FROM san_party_tb
 		WHERE san_party_id = #{sanPartyId}
 	</delete>
 
-	<insert id="insert">
-		INSERT INTO 
+	<insert id="insert" parameterType="org.zerock.wego.domain.RecruitmentDTO">
+		INSERT INTO
 			san_party_tb(
-				san_info_id, user_id, title, contents, img,
+				san_info_id, user_id, title, contents,
 				party_dt, party_max, items, condition
-			)
+				)
 			VALUES(
-				#{sanInfoId}, #{userId}, #{title}, #{contents}, #{img},
+				#{sanInfoId}, #{userId}, #{title}, #{contents},
 				#{partyDt}, #{partyMax}, #{items}, #{condition}
 			)
+			<selectKey keyProperty="sanPartyId" resultType="int" order="AFTER">
+				SELECT max(san_party_id)
+				FROM san_party_tb
+			</selectKey>
 	</insert>
 
 	<update id="update">
@@ -48,7 +52,6 @@
 			san_info_id = #{sanInfoId},
 			title = #{title},
 			contents = #{contents},
-			img = #{img},
 			party_dt = #{partyDt},
 			party_max = #{partyMax},
 			items = #{items},

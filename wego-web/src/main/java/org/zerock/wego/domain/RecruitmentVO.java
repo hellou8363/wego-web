@@ -15,7 +15,6 @@ public class RecruitmentVO {
 	private String modifiedDt; // 모집글 수정일
 	private String title; // 모집글 제목
 	private String contents; // 모집글 내용
-	private String img; // 모집글 사진
 	private Date partyDt; // 모집글 등반일(yyyy-MM-dd HH:mm)
 	private Integer partyMax; // 모집 최대 인원
 	private String items; // 준비물

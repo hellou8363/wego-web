@@ -162,9 +162,9 @@
 					<c:forEach var="item" items="${mountainInfoList}">
 						<a href="/info/detail?sanInfoId=${item.sanInfoId}">
 							<div class="mountain-item">
-								<img class="mountain-img" src="/img/defaultImg.png" alt="img" />
+								<img class="mountain-img" src="${item.img}" alt="img" />
 								<h3 class="mountain-name" id="mountainName">${item.sanName}</h3>
-								<p class="contents" id="text">${item.details}</p>
+								<p class="mountain-contents" id="text">${item.details}</p>
 								<form class="mountain-like" action="#" method="get">
 									<button type="submit" name="favorite" value="true"
 										class="favorite"></button>
@@ -184,7 +184,7 @@
 								<img class="user-img" src="${item.userPic}" alt="img" />
 								<p class="user-name" id="userName">${item.nickName}</p>
 								<p class="mountain-name" id="mountainName">${item.sanName}</p>
-								<img class="recruit-img" src="${item.img}" alt="img" />
+								<img class="recruit-img" src="" alt="img" />
 								<p class="recruit-title" id="title">${item.title}</p>
 								<p class="recruit-schedule-schedule">날짜:</p>
 								<p class="recruit-schedule" id="schedule">
