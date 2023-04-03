@@ -1,16 +1,15 @@
 package org.zerock.wego.service;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.zerock.wego.domain.RecruitmentDTO;
-import org.zerock.wego.domain.RecruitmentViewVO;
+import org.zerock.wego.domain.FavoriteDTO;
+import org.zerock.wego.domain.FavoriteVO;
 import org.zerock.wego.exception.ServiceException;
-import org.zerock.wego.mapper.RecruitmentMapper;
+import org.zerock.wego.mapper.FavoriteMapper;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,10 +21,10 @@ import lombok.extern.log4j.Log4j2;
 @NoArgsConstructor
 
 @Service
-public class RecruitmentServiceImpl implements RecruitmentService, InitializingBean { // POJO(상속X)
+public class FavoriteServiceImpl implements FavoriteService, InitializingBean {
 
 	@Setter(onMethod_ = { @Autowired })
-	private RecruitmentMapper mapper;
+	private FavoriteMapper mapper;
 
 	@Override
 	public void afterPropertiesSet() throws ServiceException { // 1회성 전처리
@@ -38,53 +37,31 @@ public class RecruitmentServiceImpl implements RecruitmentService, InitializingB
 			throw new ServiceException(e);
 		} // try-catch
 	} // afterPropertiesSet
-
+	
 	@Override
-	public List<RecruitmentViewVO> getList() throws ServiceException {
-		log.trace("getList() invoked.");
+	public Set<FavoriteVO> getList(Long userId) throws ServiceException {
+		log.trace("get({}) invoked.", userId);
 
 		try {
-			return this.mapper.selectAll();
+			return this.mapper.selectAll(userId);
 		} catch (Exception e) {
 			throw new ServiceException(e);
 		} // try-catch
 	} // getList
 
 	@Override
-	public Set<RecruitmentViewVO> getRandom10List() throws ServiceException {
-		log.trace("getRandom10List() invoked.");
+	public Integer getCount(FavoriteDTO dto) throws ServiceException {
+		log.trace("get({}) invoked.", dto);
 
 		try {
-			return this.mapper.selectRandom10();
+			return this.mapper.selectCount(dto);
 		} catch (Exception e) {
 			throw new ServiceException(e);
 		} // try-catch
-	} // getList
-
+	} // getCount
+	
 	@Override
-	public RecruitmentViewVO get(Integer sanPartyId) throws ServiceException {
-		log.trace("get({}) invoked.", sanPartyId);
-
-		try {
-			return this.mapper.select(sanPartyId);
-		} catch (Exception e) {
-			throw new ServiceException(e);
-		} // try-catch
-	} // get
-
-	@Override
-	public boolean remove(Integer sanPartyId) throws ServiceException {
-		log.trace("remove({}) invoked.", sanPartyId);
-
-		try {
-			return this.mapper.delete(sanPartyId) == 1;
-		} catch (Exception e) {
-			throw new ServiceException(e);
-		} // try-catch
-	} // remove
-
-	@Override
-	public boolean register(RecruitmentDTO dto) throws ServiceException {
+	public boolean register(FavoriteDTO dto) throws ServiceException {
 		log.trace("register({}) invoked.", dto);
 
 		try {
@@ -95,7 +72,7 @@ public class RecruitmentServiceImpl implements RecruitmentService, InitializingB
 	} // register
 
 	@Override
-	public boolean modify(RecruitmentDTO dto) throws ServiceException {
+	public boolean modify(FavoriteDTO dto) throws ServiceException {
 		log.trace("modify({}) invoked.", dto);
 
 		try {
@@ -104,5 +81,5 @@ public class RecruitmentServiceImpl implements RecruitmentService, InitializingB
 			throw new ServiceException(e);
 		} // try-catch
 	} // modify
-
+	
 } // end class

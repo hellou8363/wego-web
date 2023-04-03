@@ -104,9 +104,9 @@ const mountains = [
 // select에 산 이름 출력(100대 명산)
 mountains.map(
   (value, index) =>
-    (selector(".select-mountain select").innerHTML += `<option value="${
-      value
-    }">${value}</option>`)
+    (selector(
+      ".select-mountain select"
+    ).innerHTML += `<option value="${value}">${value}</option>`)
 );
 
 // Enter키로 인한 submit 방지 이벤트
@@ -174,6 +174,24 @@ selector(".photo").addEventListener("click", () => {
   selector(".add-photo").style.display = "block";
   $(".add-photo").attr("tabindex", -1).focus();
 });
+
+// ========================= 1500자까지 입력
+document.querySelector("#contents").addEventListener("input", (e) => {
+  if (e.target.innerText.length > 1500) {
+    document.getSelection().removeAllRanges();
+    cutText(e.target.innerText, 1500);
+    // return false;
+  } // if
+  console.log(e.target.innerText.length);
+});
+
+async function cutText(text, length) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(text.slice(0, length));
+    }, 1000);
+  });
+}
 
 // ========================= 이미지 업로드 이벤트(드래그 드롭 & 클릭)
 // ========================= 드래그 앤 드롭 이벤트
@@ -337,8 +355,6 @@ const formCheck = () => {
     return false;
   } // if
 
-  // TODO: 내용 문자 길이 체크
-
   // 위 필수입력값이 모두 입력되었다면 폼 데이터에 저장
   // 내용을 순회하면서 img태그의 위치에 <img>삽입
   const contentChildNodes = selector("#contents").childNodes;
@@ -347,7 +363,7 @@ const formCheck = () => {
   for (let i = 0; i < contentChildNodes.length; i++) {
     if (contentChildNodes[i].nodeName === "IMG") {
       contentResult += "<img>";
-      imgFileNames.push(contentChildNodes[i].alt); // 
+      imgFileNames.push(contentChildNodes[i].alt); //
       continue;
     } // if
     if (contentChildNodes[i].nodeName === "#text") {
@@ -363,7 +379,7 @@ const formCheck = () => {
   formData.set("contents", contentResult);
 
   for (let key in imgFiles) {
-    if(imgFileNames.includes(imgFiles[key].name)) {
+    if (imgFileNames.includes(imgFiles[key].name)) {
       formData.append("imgFiles", imgFiles[key]);
     } // if
   } // for

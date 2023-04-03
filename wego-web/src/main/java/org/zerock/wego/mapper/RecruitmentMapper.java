@@ -15,8 +15,8 @@ public interface RecruitmentMapper {
 	
 	public abstract Set<RecruitmentViewVO> selectRandom10(); // 10개의 게시글 랜덤 조회
 	public abstract RecruitmentViewVO select(Integer sanPartyId); // 상세조회
-	public abstract Integer insert(RecruitmentDTO dto); // 신규게시물등록
-	public abstract Integer update(RecruitmentDTO dto); // 기존게시물수정
-	public abstract Integer delete(Integer sanPartyId); // 게시물삭제
+	public abstract Long insert(RecruitmentDTO dto); // 신규게시물등록
+	public abstract Long update(RecruitmentDTO dto); // 기존게시물수정
+	public abstract Long delete(Integer sanPartyId); // 게시물삭제
 	
 } // end interface

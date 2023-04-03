@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="/resources/css/header.css" />
 <link rel="stylesheet" href="/resources/css/footer.css" />
 <link rel="stylesheet" href="/resources/css/recruitment-write.css" />
-<script src="/resources/js/header.js" defer></script>
+<script src="/resources/js/noSearchHeader.js" defer></script>
 <script src="/resources/js/recruitment-write.js" defer></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
@@ -25,7 +25,7 @@
 </head>
 <body>	
 	<div class="total-wrap">
-		<%@include file="/WEB-INF/views/common/header.jsp"%>
+		<%@include file="/WEB-INF/views/common/noSearchHeader.jsp"%>
 		<section>
 			<form action="/recruit/modify" method="post"
 				enctype="multipart/form-data" class="container">

@@ -5,11 +5,15 @@ import java.util.Set;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.zerock.wego.domain.FavoriteDTO;
+import org.zerock.wego.domain.FavoriteVO;
 import org.zerock.wego.domain.MountainInfoViewVO;
 import org.zerock.wego.domain.RecruitmentViewVO;
 import org.zerock.wego.domain.ReviewViewVO;
 import org.zerock.wego.exception.ControllerException;
+import org.zerock.wego.service.FavoriteService;
 import org.zerock.wego.service.MountainInfoService;
 import org.zerock.wego.service.RecruitmentService;
 import org.zerock.wego.service.ReviewService;
@@ -28,12 +32,17 @@ public class FrontController {
 	private RecruitmentService recruitmentService;
 	private ReviewService reviewService;
 	private SearchService searchService;
+	private FavoriteService favoriteService;
 
 	@GetMapping("")
 	public String main(Model model) throws ControllerException {
 		log.trace("main() invoked.");
 
 		try {
+			// === 유저ID 9의 좋아요 목록 ===
+			Set<FavoriteVO> favoriteList = this.favoriteService.getList(9L);
+			model.addAttribute("favoriteList", favoriteList);
+
 			// =========== 산정보 ===========
 			Set<MountainInfoViewVO> mountainInfoList = this.mountainInfoService.getRandom10List();
 			model.addAttribute("mountainInfoList", mountainInfoList);
@@ -73,5 +82,25 @@ public class FrontController {
 		} // try-catch
 
 	} // searchResult
+
+	@PostMapping("/favorite")
+	public void favorite(FavoriteDTO dto) throws ControllerException {
+		log.trace("favorite({}) invoked.", dto);
+
+		try {
+			// 기존에 좋아요 정보가 있는지 체크
+			Integer resultCount = this.favoriteService.getCount(dto);
+			log.info("resultCount: {}", resultCount);
+			
+			if (resultCount == 1) { // 있는 경우 수정
+				this.favoriteService.modify(dto);
+			} else { // 없는 경우 등록
+				this.favoriteService.register(dto);
+			} // if-else
+
+		} catch (Exception e) {
+			throw new ControllerException(e);
+		} // try-catch
+	} // favorite
 
 } // end class

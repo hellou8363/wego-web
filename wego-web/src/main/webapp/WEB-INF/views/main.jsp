@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -17,6 +18,7 @@
 <link rel="stylesheet" href="/resources/css/main.css" />
 <script src="/resources/js/header.js" defer></script>
 <script src="/resources/js/main.js" defer></script>
+<script src="/resources/js/favorite.js" defer></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script
@@ -165,11 +167,19 @@
 								<img class="mountain-img" src="${item.img}" alt="img" />
 								<h3 class="mountain-name" id="mountainName">${item.sanName}</h3>
 								<p class="mountain-contents" id="text">${item.details}</p>
-								<form class="mountain-like" action="#" method="get">
-									<button type="submit" name="favorite" value="true"
-										class="favorite"></button>
+								<div class="mountain-like">
+									<c:set var="doneLoop" value="false" />
+									<c:set var="status" value="" />
+									<c:forEach var="userFavorite" items="${favoriteList}">
+										<c:if
+											test="${userFavorite.targetGb == 'SAN_INFO' 
+											&& userFavorite.targetCd == item.sanInfoId}">
+											<c:set var="status" value=" on" />
+										</c:if>
+									</c:forEach>
+									<button type="button" name="favorite" class="favorite${status}"></button>
 									<span class="favorite-count">${item.likeCnt}</span>
-								</form>
+								</div>
 							</div> <!-- mountain-item -->
 						</a>
 					</c:forEach>
@@ -197,11 +207,19 @@
 								<p class="recruit-schedule-member">참여 인원:</p>
 								<p class="recruit-member" id="memberCount">${item.userCnt}/
 									${item.partyMax}</p>
-								<form class="recruit-like" action="#" method="get">
-									<button type="submit" name="favorite" value="true"
-										class="favorite"></button>
+								<div class="recruit-like">
+									<c:set var="doneLoop" value="false" />
+									<c:set var="status" value="" />
+									<c:forEach var="userFavorite" items="${favoriteList}">
+										<c:if
+											test="${userFavorite.targetGb == 'SAN_PARTY' 
+											&& userFavorite.targetCd == item.sanPartyId}">
+											<c:set var="status" value=" on" />
+										</c:if>
+									</c:forEach>
+									<button type="button" name="favorite" class="favorite${status}"></button>
 									<span class="favorite-count">${item.likeCnt}</span>
-								</form>
+								</div>
 								<p class="recruit-date" id="date">
 									<fmt:formatDate value="${item.createDt}" pattern="yyyy-MM-dd" />
 								</p>
@@ -224,14 +242,23 @@
 								<img class="review-img" src="/img/defaultImg.png" alt="img" />
 								<h3 class="review-title" id="title">${item.title}</h3>
 								<p class="review-contents" id="text">${item.contents}</p>
-								<form class="review-like" action="#" method="get">
-									<button type="submit" name="favorite" value="true"
-										class="favorite"></button>
+								<div class="review-like">
+									<c:set var="doneLoop" value="false" />
+									<c:set var="status" value="" />
+									<c:forEach var="userFavorite" items="${favoriteList}">
+										<c:if
+											test="${userFavorite.targetGb == 'SAN_REVIEW' 
+											&& userFavorite.targetCd == item.sanReviewId}">
+											<c:set var="status" value=" on" />
+										</c:if>
+									</c:forEach>
+									<button type="button" name="favorite" class="favorite${status}"></button>
 									<span class="favorite-count">${item.likeCnt}</span>
-								</form>
-								<p class="review-date" id="date"><fmt:formatDate value="${item.createDt}" pattern="yyyy-MM-dd" /></p>
-							</div>
-							<!-- review-item -->
+								</div>
+								<p class="review-date" id="date">
+									<fmt:formatDate value="${item.createDt}" pattern="yyyy-MM-dd" />
+								</p>
+							</div> <!-- review-item -->
 						</a>
 					</c:forEach>
 				</div>
